@@ -54,7 +54,7 @@ app.get("/top_products", function (req, res) {
 
 app.get("/top_customers", function (req, res) {
   connection.query(
-    "SELECT a1_customer.*, sum(quantity*price) as price_sum FROM customerid,a1_order,a1_product WHERE a1_order.customerid = customerid.customerid AND a1_order.idcloth = a1_product.idcloth GROUP BY a1_order.customerid ORDER BY price_sum DESC;",
+    "SELECT a1_customer.*, sum(quantity*price) as price_sum FROM customerid,a1_order,a1_product WHERE a1_order.customerid = a1_customer.customerid AND a1_order.idcloth = a1_product.idcloth GROUP BY a1_order.customerid ORDER BY price_sum DESC;",
     function (err, results) {
       console.log(results); //แสดงผลที่ console
       res.json(results); //ตอบกลับ request
